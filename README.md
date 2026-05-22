@@ -66,3 +66,96 @@ public class Student implements Serializable {
 ---
 
 ## Java OOP
+
+### I. Functional Interface
+
+- Interface chỉ có 1 abstract method
+- Có thể sử dụng @FunctionalInterface
+- Có thể sử dụng Lambda Expression
+
+```java
+@FunctionalInterface
+interface MyInterface {
+    void myMethod();
+}
+
+MyInterface myInterface = () -> System.out.println("Hello World");
+myInterface.myMethod();
+```
+
+- Các nhóm Functional Interface cốt lõi trong gói java.util.function:
+  - **Nhóm Function (Ánh xạ / Chuyển đổi dữ liệu)**: `Function<T, R>`, `BiFunction<T, U, R>`, `BinaryOperator<T>`, `UnaryOperator<T>`.
+  - **Nhóm Consumers (Tiêu thụ dữ liệu)**: `Consumer<T>`, `BiConsumer<T, U>`, `IntConsumer`, `LongConsumer`, `DoubleConsumer`, `Stream.forEach()`
+  - **Nhóm Suppliers (Cung cấp dữ liệu)**: `Supplier<T>`, `BooleanSupplier`, `IntSupplier`, `LongSupplier`, `DoubleSupplier`.
+  - **Nhóm Predicates (Kiểm tra điều kiện)**: `Predicate<T>`, `BiPredicate<T, U>`, `IntPredicate`, `LongPredicate`, `DoublePredicate`.
+  - **Nhóm Comparator (So sánh đối tượng)**: `Comparator<T>`.
+
+### II. Stream API
+
+1. `filter()`
+2. `map()`
+3. `reduce()`
+
+### III. default method
+
+- Mở rộng tính năng cho một Interface đang có sẵn trong dự án lớn mà không muốn làm ảnh hưởng (gây lỗi compile) đến các lớp con đã viết từ trước
+
+### IV. Double Colon Operator in Java (::)
+
+- Là cú pháp viết ngắn gọn (syntactic sugar) trong Java để biểu diễn một Method Reference.
+- Có thể sử dụng để thay thế cho Lambda Expression khi cần truyền một method có sẵn vào một Functional Interface.
+
+### V. Các loại Double Colon Operator
+
+1. **Tham chiếu tới một static method:**
+
+   ```java
+   // Lambda
+   list.forEach(e -> System.out.println(e));
+   // Double Colon
+   list.forEach(System.out::println);
+   ```
+
+2. **Tham chiếu tới một instance method:**
+
+   ```java
+   // Lambda
+   Comparator<String> c = (s1, s2) -> s1.compareTo(s2);
+   // Double Colon
+   Comparator<String> c = String::compareTo;
+   ```
+
+3. **Tham chiếu tới constructor:**
+
+   ```java
+   // Lambda
+   Supplier<MyClass> s = () -> new MyClass();
+   // Double Colon
+   Supplier<MyClass> s = MyClass::new;
+   ```
+
+4. **Tham chiếu tới instance method với tham số đặc biệt (this, super):**
+
+   ```java
+   // Tham chiếu tới method của đối tượng hiện tại
+   list.forEach(this::myMethod);
+   // Tham chiếu tới method của đối tượng cha
+   super::myMethod;
+   ```
+
+### VI. Optional
+
+### VII. Text Blocks
+
+```java
+   String html = """
+                  <html>
+                     <body>
+                        <h1>Hello, World!</h1>
+                     </body>
+                  </html>
+                  """;
+   System.out.println(html);
+```
+
+### VIII. isBlank()
